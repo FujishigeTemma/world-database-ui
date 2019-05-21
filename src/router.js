@@ -1,15 +1,55 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import Axios from "./views/Axios.vue";
+import Login from "./views/Login.vue";
+import City from "./views/City.vue";
+import List from "./views/List.vue";
+import axios from "axios";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: "/",
       name: "home",
-      component: Home
+      component: Home,
+      meta: {
+        isPublic: true
+      }
+    },
+    {
+      path: "/axios",
+      name: "axios",
+      component: Axios,
+      meta: {
+        isPublic: true
+      }
+    },
+    {
+      path: "/city/:cityName",
+      name: "City",
+      component: City,
+      meta: {
+        isPublic: true
+      }
+    },
+    {
+      path: "/List",
+      name: "List",
+      component: List,
+      meta: {
+        isPublic: true
+      }
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: Login,
+      meta: {
+        isPublic: true
+      }
     },
     {
       path: "/about",
@@ -22,3 +62,17 @@ export default new Router({
     }
   ]
 });
+
+router.beforeEach(async (to, from, next) => {
+  try {
+    await axios.get("/api/whoami");
+  } catch (_) {
+    if (to.meta.isPublic) {
+      return next(true);
+    }
+    return next("/login");
+  }
+  next(true);
+});
+
+export default router;
