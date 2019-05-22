@@ -4,9 +4,13 @@
       <div v-if="countryList">
         <div v-for="Country in countryList" :key="Country.Name">
           <div class="Country">
-            <div class="Name">--{{ Country.Name }}</div>
+            <div class="Name">
+              <router-link :to="`/countries/${Country.Name}`">{{
+                Country.Name
+              }}</router-link>
+            </div>
             <div class="Continent">--{{ Country.Continent }}--</div>
-            <div class="Region">{{ Country.Region }}--</div>
+            <div class="Region">{{ Country.Region }}</div>
           </div>
         </div>
       </div>

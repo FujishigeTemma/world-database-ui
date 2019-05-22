@@ -5,6 +5,7 @@ import Axios from "./views/Axios.vue";
 import Login from "./views/Login.vue";
 import City from "./views/City.vue";
 import List from "./views/List.vue";
+import Cities from "./views/Cities.vue";
 import axios from "axios";
 
 Vue.use(Router);
@@ -36,6 +37,11 @@ const router = new Router({
       path: "/List",
       name: "List",
       component: List
+    },
+    {
+      path: "/countries/:countryName",
+      name: "Cities",
+      component: Cities
     },
     {
       path: "/login",
