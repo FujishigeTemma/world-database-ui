@@ -30,18 +30,12 @@ const router = new Router({
     {
       path: "/city/:cityName",
       name: "City",
-      component: City,
-      meta: {
-        isPublic: true
-      }
+      component: City
     },
     {
       path: "/List",
       name: "List",
-      component: List,
-      meta: {
-        isPublic: true
-      }
+      component: List
     },
     {
       path: "/login",

@@ -1,7 +1,17 @@
 <template>
   <div>
-    <div v-if="countryList">{{ countryList }}</div>
-    <div v-else>リストが取得できませんでした</div>
+    <div class="body">
+      <div v-if="countryList">
+        <div v-for="Country in countryList" :key="Country.Name">
+          <div class="Country">
+            <div class="Name">--{{ Country.Name }}</div>
+            <div class="Continent">--{{ Country.Continent }}--</div>
+            <div class="Region">{{ Country.Region }}--</div>
+          </div>
+        </div>
+      </div>
+      <div v-else>リストが取得できませんでした</div>
+    </div>
   </div>
 </template>
 
@@ -15,10 +25,20 @@ export default {
     };
   },
   mounted() {
-    const cityName = this.$route.params.cityName;
-    axios.get("/api/cities/" + cityName).then(res => {
+    axios.get("/api/countryList").then(res => {
       this.countryList = res.data;
     });
   }
 };
 </script>
+
+<style>
+div.Country {
+  display: flex;
+  justify-content: center;
+}
+div.body {
+  display: flex;
+  justify-content: center;
+}
+</style>
